@@ -12,6 +12,10 @@
 - I use **CascadiaCode**
 - Navigate to the right-pointing arrow next to the new tab icon in the terminal -> settings -> Defaults -> Appearance -> under "Font face," you can opt for "CaskaydiaCove Nerd Font Mono" if desired
 
+### Note
+
+- Please set the font in the VsCode terminal to 'CaskaydiaCove Nerd Font Mono' for all profiles to ensure that certain characters are not displayed incorrectly (any nerd font will do the job)
+
 ## Oh My Posh Custom Theme
 
 Template which inspired me: [Github Link](https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/emodipt-extend.omp.json)
