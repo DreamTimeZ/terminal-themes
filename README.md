@@ -1,5 +1,9 @@
 # Terminal Theme (with Oh My Posh)
 
+## Preview
+
+![Preview](preview.png)
+
 ## Install & Update Oh My Posh
 
 - Install: `winget install JanDeDobbeleer.OhMyPosh -s winget`
