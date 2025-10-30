@@ -7,35 +7,29 @@
       "segments": [
         {
           "properties": {},
-          "template": "x{{ reason .Code }}",
-          "foreground": "#b8ff75",
+          "template": "{{ if gt .Code 0 }}✗ {{ .Code }} {{ end }}",
+          "foreground": "#E06C75",
           "type": "status",
-          "style": "plain",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#E06C75{{ end }}"
-          ]
+          "style": "plain"
         },
         {
           "properties": {
-            "always_enabled": true,
-            "style": "roundrock"
+            "threshold": 2000,
+            "style": "round"
           },
           "template": "{{ .FormattedMs }} ",
           "foreground": "#b8ff75",
           "type": "executiontime",
-          "style": "diamond",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#E06C75{{ end }}"
-          ]
+          "style": "plain"
         },
         {
           "properties": {
-            "cache_duration": "1h",
+            "cache_duration": "24h",
             "mapped_shell_names": {
               "bash": "Bash ",
               "cmd": "Cmd ",
-              "powershell": "WinPS ",
-              "pwsh": "PS "
+              "powershell": "",
+              "pwsh": ""
             }
           },
           "template": "{{ .Name }}",
@@ -45,7 +39,7 @@
         },
         {
           "properties": {
-            "cache_duration": "1h"
+            "cache_duration": "24h"
           },
           "template": "{{ .UserName }}@{{ .HostName }} ",
           "foreground": "#E5C07B",
@@ -54,11 +48,11 @@
         },
         {
           "properties": {
-            "branch_max_length": 25,
+            "branch_max_length": 20,
             "fetch_stash_count": false,
             "fetch_status": false,
             "fetch_upstream_icon": false,
-            "cache_duration": "15m"
+            "cache_duration": "30m"
           },
           "template": "{{ .HEAD }} ",
           "foreground": "#F3C267",
@@ -67,23 +61,24 @@
         },
         {
           "properties": {
-            "style": "full"
+            "style": "agnoster_short",
+            "max_depth": 3
           },
-          "template": "{{ .Path }}",
+          "template": "{{ .Path }} ",
           "foreground": "#61AFEF",
           "type": "path",
           "style": "plain"
         },
         {
           "properties": {},
-          "template": " !",
+          "template": "!",
           "foreground": "#E06C75",
           "type": "root",
           "style": "plain"
         },
         {
           "properties": {},
-          "template": " λ",
+          "template": "λ",
           "foreground": "#E06C75",
           "type": "text",
           "style": "plain"
@@ -92,5 +87,9 @@
     }
   ],
   "version": 3,
-  "final_space": true
+  "final_space": true,
+  "transient_prompt": {
+    "foreground": "#E06C75",
+    "template": "λ "
+  }
 }

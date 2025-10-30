@@ -1,0 +1,272 @@
+# Starship Theme - High Performance & Fancy
+# Migrated from oh-my-posh with enhanced features
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# ===== GENERAL SETTINGS =====
+format = """
+$status\
+$cmd_duration\
+$jobs\
+$shell\
+$username\
+$hostname\
+$git_branch\
+$git_status\
+$directory\
+$sudo\
+$python\
+$nodejs\
+$rust\
+$golang\
+$docker_context\
+$package\
+$git_commit\
+$character\
+"""
+
+# Add a newline before each prompt
+add_newline = true
+
+# Timeout for commands (performance optimization)
+command_timeout = 500
+
+# Faster file detection (default is 30ms)
+scan_timeout = 10
+
+# ===== STATUS (Exit Code) =====
+# Only shows on errors (exit code != 0)
+[status]
+disabled = false
+symbol = '[✗ $status](bold #E06C75)'
+success_symbol = ''
+not_executable_symbol = '[✗ $status](bold #E06C75)'
+not_found_symbol = '[✗ $status](bold #E06C75)'
+sigint_symbol = '[✗](bold #E5C07B)'
+signal_symbol = '[✗ $status](bold #E06C75)'
+format = '$symbol '
+map_symbol = true
+recognize_signal_code = true
+
+# ===== EXECUTION TIME =====
+[cmd_duration]
+min_time = 2000
+show_milliseconds = false
+format = '[$duration]($style) '
+style = '#b8ff75'
+show_notifications = false
+
+# ===== JOBS (Background tasks) =====
+# Only shows when you have background jobs running
+[jobs]
+disabled = false
+symbol = '⚙ '
+number_threshold = 1
+symbol_threshold = 1
+format = '[$symbol$number]($style) '
+style = 'bold #E5C07B'
+
+# ===== SHELL =====
+[shell]
+disabled = false
+format = '[$indicator]($style)'
+style = '#E06C75'
+bash_indicator = 'Bash '
+cmd_indicator = 'Cmd '
+powershell_indicator = ''
+pwsh_indicator = ''
+unknown_indicator = '? '
+
+# ===== SESSION (Username & Hostname) =====
+[username]
+disabled = false
+show_always = true
+format = '[$user]($style)'
+style_user = '#E5C07B'
+style_root = 'bold #E06C75'
+
+[hostname]
+disabled = false
+ssh_only = false
+format = '[@$hostname]($style) '
+style = '#E5C07B'
+trim_at = '.'
+
+# ===== GIT BRANCH =====
+[git_branch]
+disabled = false
+format = '[$branch(:$remote_branch) ]($style)'
+symbol = ''
+style = '#F3C267'
+truncation_length = 20
+truncation_symbol = '…'
+only_attached = true
+always_show_remote = false
+
+# ===== GIT STATUS =====
+# Disabled for cleaner prompt
+[git_status]
+disabled = true
+
+# ===== DIRECTORY/PATH =====
+[directory]
+disabled = false
+truncation_length = 2
+truncate_to_repo = true
+format = '[$path]($style)[$read_only]($read_only_style) '
+style = '#61AFEF'
+read_only = ' 🔒'
+read_only_style = '#E06C75'
+home_symbol = '~'
+use_os_path_sep = true
+
+# ===== ROOT/SUDO INDICATOR =====
+[sudo]
+disabled = false
+format = '[$symbol]($style)'
+symbol = '! '
+style = 'bold #E06C75'
+
+# ===== CHARACTER (Prompt Symbol) =====
+[character]
+disabled = false
+format = '$symbol '
+success_symbol = '[λ](#E06C75)'
+error_symbol = '[λ](#E06C75)'
+vimcmd_symbol = '[λ](#b8ff75)'
+vimcmd_visual_symbol = '[λ](#E5C07B)'
+vimcmd_replace_symbol = '[λ](#F3C267)'
+vimcmd_replace_one_symbol = '[λ](#F3C267)'
+
+# ===== ADDITIONAL FANCY FEATURES =====
+
+# Battery indicator (only shows when < 30%)
+# Disabled by default for desktop performance - uncomment to enable on laptops
+[battery]
+disabled = true
+full_symbol = '🔋'
+charging_symbol = '⚡'
+discharging_symbol = '💀'
+format = '[$symbol$percentage]($style) '
+
+[[battery.display]]
+threshold = 30
+style = 'bold #E06C75'
+
+[[battery.display]]
+threshold = 10
+style = 'bold blink #E06C75'
+
+# Time indicator (optional, disabled by default)
+[time]
+disabled = true
+format = '[$time]($style) '
+style = '#98C379'
+time_format = '%T'
+use_12hr = false
+
+# ===== LANGUAGE/TOOL INDICATORS (Performance Optimized) =====
+
+[python]
+disabled = false
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = ' '
+style = '#61AFEF'
+detect_extensions = ['py']
+detect_files = ['.python-version', 'Pipfile', 'requirements.txt', 'pyproject.toml', 'setup.py']
+detect_folders = []
+
+[nodejs]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = ' '
+style = '#98C379'
+detect_extensions = ['js', 'mjs', 'cjs', 'ts']
+detect_files = ['package.json', '.node-version', '.nvmrc']
+detect_folders = []
+
+[rust]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = ' '
+style = '#E06C75'
+detect_extensions = ['rs']
+detect_files = ['Cargo.toml']
+detect_folders = []
+
+[golang]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = ' '
+style = '#61AFEF'
+detect_extensions = ['go']
+detect_files = ['go.mod', 'go.sum']
+detect_folders = []
+
+[docker_context]
+disabled = false
+format = '[$symbol$context]($style) '
+symbol = ' '
+style = '#61AFEF'
+only_with_files = true
+detect_extensions = []
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_folders = []
+
+# ===== PACKAGE VERSION =====
+# Shows package version from package.json, Cargo.toml, etc.
+# Set disabled = true if you experience slowdowns
+[package]
+disabled = false
+format = '[$symbol$version]($style) '
+symbol = '📦 '
+style = '#E5C07B'
+display_private = false
+
+# ===== GIT COMMIT =====
+[git_commit]
+disabled = false
+commit_hash_length = 7
+format = '[\($hash$tag\)]($style) '
+style = '#98C379'
+only_detached = true
+tag_disabled = true
+tag_symbol = ' 🏷 '
+
+# ===== MEMORY USAGE (Disabled by default for performance) =====
+[memory_usage]
+disabled = true
+threshold = 75
+format = '[$symbol${ram_pct}]($style) '
+symbol = '🐏 '
+style = '#E5C07B'
+
+# ===== AWS (Disabled by default) =====
+[aws]
+disabled = true
+format = '[$symbol($profile )(\($region\) )]($style)'
+symbol = '☁️  '
+style = '#E5C07B'
+
+# ===== KUBERNETES (Disabled by default) =====
+[kubernetes]
+disabled = true
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = '☸ '
+style = '#61AFEF'
+
+# ===== LINE BREAK =====
+[line_break]
+disabled = false
+
+# ===== TRANSIENT PROMPT =====
+# Makes previous prompts more minimal after command execution
+# To enable in PowerShell, add this to your $PROFILE after the starship init:
+#
+# function Invoke-Starship-TransientFunction {
+#   &starship module character
+# }
+# Enable-TransientPrompt
+#
+# This will show "λ" for previous commands instead of the full prompt

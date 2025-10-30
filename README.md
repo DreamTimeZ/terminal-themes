@@ -1,46 +1,100 @@
-# Terminal Theme (with Oh My Posh)
+# Terminal Themes Collection
+
+Two high-performance terminal themes with identical aesthetics: **Oh My Posh** and **Starship**.
 
 ## Preview
 
 ![Preview](preview.png)
 
-## Install & Update Oh My Posh
+## Quick Start
 
-- Install: `winget install JanDeDobbeleer.OhMyPosh -s winget`
-- Update: `winget upgrade JanDeDobbeleer.OhMyPosh -s winget`
+### 1. Install Theme Engine
 
-## Fonts
+**Oh My Posh:**
+```PowerShell
+winget install --id=JanDeDobbeleer.OhMyPosh -s winget -e --interactive
+```
 
-- Navigate to the Nerd Fonts GitHub repository, proceed to the "Releases" section, and select a font for downloading from the most recent release.
-  - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/releases)
-- I use **CascadiaCode**
-- Navigate to the right-pointing arrow next to the new tab icon in the terminal -> settings -> Defaults -> Appearance -> under "Font face," you can opt for "CaskaydiaCove Nerd Font Mono" if desired
+**Starship (alternative):**
+```PowerShell
+winget install --id=Starship.Starship -e --interactive
+```
 
-### Note
+### 2. Install Nerd Font
 
-- Please set the font in the VsCode terminal to 'CaskaydiaCove Nerd Font Mono' for all profiles to ensure that certain characters are not displayed incorrectly (any nerd font will do the job)
+Download [CascadiaCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases) and configure:
+- **Windows Terminal:** Settings → Defaults → Appearance → Font face → "CaskaydiaCove Nerd Font Mono"
+- **VS Code:** Settings → Terminal → Integrated: Font Family → "CaskaydiaCove Nerd Font Mono"
 
-## Oh My Posh Custom Theme
+### 3. Configure PowerShell Profile
 
-Template which inspired me: [Github Link](https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/emodipt-extend.omp.json)
+Add to `$PROFILE`:
 
-### Documentation
+```PowerShell
+# Oh My Posh - Prompt theme engine
+#oh-my-posh init pwsh --config "$([Environment]::GetFolderPath('MyDocuments'))\TerminalThemes\oh-my-posh-theme.json" | Invoke-Expression
 
-The theme displays:
-- Exit status indicator (✓ for success, ✗ with error code for failures)
-- Command execution time (when > 500ms)
-- Shell name
-- User@Hostname
-- Git branch name (simplified, with 15-minute cache for better performance)
-- Current directory path
-- Root indicator (!) when running as administrator
-- Prompt symbol (λ)
+# Starship - Alternative prompt theme (comment out oh-my-posh above and uncomment below to use)
+$ENV:STARSHIP_CONFIG = "$([Environment]::GetFolderPath('MyDocuments'))\TerminalThemes\starship-theme.toml"
+Invoke-Expression (&starship init powershell)
+function Invoke-Starship-TransientFunction {
+  &starship module character  # Show "λ" for previous commands
+}
+Enable-TransientPrompt  # Simplify previous prompts to save screen space
+```
 
-#### Set The Theme
+**To switch themes:** Comment/uncomment the respective sections and restart your terminal.
 
-- `oh-my-posh init pwsh --config "$env:userprofile\Documents\TerminalThemes\oh-my-posh-theme.json" | Invoke-Expression`
-- To ensure its persistence, append it to your profile file.
+## Theme Comparison
 
-## Oh My Posh Default Themes
+| Feature | Oh My Posh | Starship |
+|---------|-----------|----------|
+| **Startup Time** | ~194ms (Windows PowerShell) | **~86ms (2.3x faster)** |
+| **Core Info** | Status, time, shell, user@host, git, path, root, λ | ✓ Same + jobs indicator |
 
-- `oh-my-posh init pwsh --config '$env:userprofile\emodipt-extend.omp.json' | Invoke-Expression`
+## Design Philosophy
+
+**Color Scheme (One Dark):**
+- 🔴 `#E06C75` — Errors, shell, root, prompt (λ)
+- 🟡 `#E5C07B` — Username, hostname, jobs
+- 🟠 `#F3C267` — Git branch
+- 🔵 `#61AFEF` — Directory path
+- 🟢 `#b8ff75` — Execution time
+
+**Performance Optimizations:**
+- Git status/stash/upstream fetching disabled
+- Execution time threshold: 2s
+- Aggressive caching (oh-my-posh) / file-based detection (starship)
+- Plain style (no powerline separators)
+
+**Common Features:**
+- Exit code display (✗ + code)
+- Execution time (>2s)
+- Git branch (20 char max)
+- Admin indicator (!)
+- Lambda (λ) prompt symbol
+- Transient prompt support
+
+## Recommendations
+
+- **Choose Starship if:** You want the best performance (2.3x faster startup), more features, and context-aware info
+- **Choose Oh My Posh if:** You prefer built-in transient prompt support or have specific oh-my-posh requirements
+
+**Note:** Starship significantly outperforms Oh My Posh (86ms vs 194ms theme initialization on Windows PowerShell) while providing more features. Both themes share identical visual appearance with the One Dark color scheme.
+
+## Updating
+
+```PowerShell
+# Oh My Posh
+winget upgrade --id=JanDeDobbeleer.OhMyPosh -e
+
+# Starship
+winget upgrade --id=Starship.Starship -e
+```
+
+## References
+
+- [Oh My Posh Documentation](https://ohmyposh.dev/)
+- [Starship Documentation](https://starship.rs/)
+- [Nerd Fonts](https://www.nerdfonts.com/)
+- Original inspiration: [emodipt-extend theme](https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/emodipt-extend.omp.json)
