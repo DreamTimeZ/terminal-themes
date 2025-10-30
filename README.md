@@ -26,23 +26,15 @@ Template which inspired me: [Github Link](https://github.com/JanDeDobbeleer/oh-m
 
 ### Documentation
 
-- `[{HEAD-name} S +A ~B -C !D | +E ~F -G !H W]`
-- `≡` = The local branch in at the same commit level as the remote branch (BranchIdenticalStatus)
-- `↑ <num>` = The local branch is ahead of the remote branch by the specified number of commits; a git push is required to update the remote branch (BranchAheadStatus)
-- `↓ <num>` = The local branch is behind the remote branch by the specified number of commits; a git pull is required to update the local branch (BranchBehindStatus)
-
-    `ABCD` represent the index; | (`DelimStatus`); `EFGH` represent the working directory
-  
-  - `+` = Added files
-  - `?` = Not added files
-  - `~` = Modified files
-  - `!` = Conflicted files
-
-  W represents the overall status of the working directory
-
-  - `!` = There are unstaged changes in the working tree (`LocalWorkingStatusSymbol`)
-  - `~` = There are uncommitted changes i.e. staged changes in the working tree waiting to be committed (`LocalStagedStatusSymbol`)
-  - `None` = There are no unstaged or uncommitted changes to the working tree (`LocalDefaultStatusSymbol`)
+The theme displays:
+- Exit status indicator (✓ for success, ✗ with error code for failures)
+- Command execution time (when > 500ms)
+- Shell name
+- User@Hostname
+- Git branch name (simplified, with 15-minute cache for better performance)
+- Current directory path
+- Root indicator (!) when running as administrator
+- Prompt symbol (λ)
 
 #### Set The Theme
 

@@ -6,9 +6,7 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
-            "cache_duration": "none"
-          },
+          "properties": {},
           "template": "x{{ reason .Code }}",
           "foreground": "#b8ff75",
           "type": "status",
@@ -20,7 +18,6 @@
         {
           "properties": {
             "always_enabled": true,
-            "cache_duration": "none",
             "style": "roundrock"
           },
           "template": "{{ .FormattedMs }} ",
@@ -33,7 +30,7 @@
         },
         {
           "properties": {
-            "cache_duration": "none",
+            "cache_duration": "1h",
             "mapped_shell_names": {
               "bash": "Bash ",
               "cmd": "Cmd ",
@@ -48,7 +45,7 @@
         },
         {
           "properties": {
-            "cache_duration": "none"
+            "cache_duration": "1h"
           },
           "template": "{{ .UserName }}@{{ .HostName }} ",
           "foreground": "#E5C07B",
@@ -58,25 +55,18 @@
         {
           "properties": {
             "branch_max_length": 25,
-            "cache_duration": "none",
-            "fetch_stash_count": true,
-            "fetch_status": true,
-            "fetch_upstream_icon": true
+            "fetch_stash_count": false,
+            "fetch_status": false,
+            "fetch_upstream_icon": false,
+            "cache_duration": "15m"
           },
-          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "template": "{{ .HEAD }} ",
           "foreground": "#F3C267",
           "type": "git",
-          "style": "plain",
-          "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}",
-            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
-            "{{ if gt .Behind 0 }}#B388FF{{ end }}"
-          ]
+          "style": "plain"
         },
         {
           "properties": {
-            "cache_duration": "none",
             "style": "full"
           },
           "template": "{{ .Path }}",
@@ -85,18 +75,14 @@
           "style": "plain"
         },
         {
-          "properties": {
-            "cache_duration": "none"
-          },
+          "properties": {},
           "template": " !",
           "foreground": "#E06C75",
           "type": "root",
           "style": "plain"
         },
         {
-          "properties": {
-            "cache_duration": "none"
-          },
+          "properties": {},
           "template": " λ",
           "foreground": "#E06C75",
           "type": "text",
