@@ -171,7 +171,7 @@ use_12hr = false
 [python]
 disabled = false
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-symbol = ' '
+symbol = ''
 style = '#61AFEF'
 detect_extensions = ['py']
 detect_files = ['.python-version', 'Pipfile', 'requirements.txt', 'pyproject.toml', 'setup.py']
@@ -180,7 +180,7 @@ detect_folders = []
 [nodejs]
 disabled = false
 format = '[$symbol($version )]($style)'
-symbol = ' '
+symbol = ''
 style = '#98C379'
 detect_extensions = ['js', 'mjs', 'cjs', 'ts']
 detect_files = ['package.json', '.node-version', '.nvmrc']
@@ -189,7 +189,7 @@ detect_folders = []
 [rust]
 disabled = false
 format = '[$symbol($version )]($style)'
-symbol = ' '
+symbol = ''
 style = '#E06C75'
 detect_extensions = ['rs']
 detect_files = ['Cargo.toml']
@@ -198,7 +198,7 @@ detect_folders = []
 [golang]
 disabled = false
 format = '[$symbol($version )]($style)'
-symbol = ' '
+symbol = ''
 style = '#61AFEF'
 detect_extensions = ['go']
 detect_files = ['go.mod', 'go.sum']
